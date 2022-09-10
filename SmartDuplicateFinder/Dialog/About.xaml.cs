@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SmartDuplicateFinder.Util;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SmartDuplicateFinder.Dialog
 {
@@ -22,6 +12,21 @@ namespace SmartDuplicateFinder.Dialog
         public About()
         {
             InitializeComponent();
+            AddCommandBindings();
+
+            GetVersionInfo();
+
+            DataContext = this;
+        }
+        public string Version { get; private set; } = "";
+
+        private void GetVersionInfo()
+        {
+            Version = CoreAssembly.Version.ToString(4);
+        }
+        private void AddCommandBindings()
+        {
+            CommandBindings.Add(new CommandBinding(AppCommands.Okay, (sender, args) => Close()));
         }
     }
 }

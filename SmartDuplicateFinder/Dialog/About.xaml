@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:smartDuplicateFinder="clr-namespace:SmartDuplicateFinder"
         xmlns:local="clr-namespace:SmartDuplicateFinder.Dialog"
         mc:Ignorable="d"
         Title="About Smart Duplicate Finder"
@@ -33,8 +34,9 @@
                         IsCancel="True"
                         MinWidth="75"
                         Height="23"
-                        Content="Okay">
-                    
+                        Command="smartDuplicateFinder:AppCommands.Okay"
+                        Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}">
+
                 </Button>
             </StackPanel>
             <Grid DockPanel.Dock="Top"
@@ -52,6 +54,27 @@
                            Text="By SoftReality"
                            TextAlignment="Right"
                            FontSize="20" />
+            </Grid>
+            <Grid Margin="20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer>
+                    <TextBlock />
+                </ScrollViewer>
+                <TextBlock Grid.Row="4">
+                    
+                </TextBlock>
+                <TextBlock Grid.Row="5">
+
+                </TextBlock>
             </Grid>
         </DockPanel>
     </Border>
