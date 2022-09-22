@@ -1,0 +1,81 @@
+﻿<Window x:Class="SmartDuplicateFinder.Dialog.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:smartDuplicateFinder="clr-namespace:SmartDuplicateFinder"
+        xmlns:local="clr-namespace:SmartDuplicateFinder.Dialog"
+        mc:Ignorable="d"
+        Title="About Smart Duplicate Finder"
+        Height="392.509"
+        Width="572"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="#FFF0F0F0"
+        >
+    <Border Margin="15"
+            Background="White"
+            BorderBrush="#FF828790"
+            BorderThickness="1"
+            >
+        <DockPanel>
+            <Border DockPanel.Dock="Left"
+                    Width="150"
+                    Background="#FFEFEEE6">
+                <Image 
+                       Margin="0,46,0,116" 
+                       Source="../Images/search-for-dupliate-files.png" HorizontalAlignment="Left" Width="150" />
+            </Border>
+            <StackPanel DockPanel.Dock="Bottom"
+                        Margin="10"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button IsDefault="True"
+                        IsCancel="True"
+                        MinWidth="75"
+                        Height="23"
+                        Command="smartDuplicateFinder:AppCommands.Okay"
+                        Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}">
+
+                </Button>
+            </StackPanel>
+            <Grid DockPanel.Dock="Top"
+                  Margin="0,10"
+                  HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                    Text="Smart Duplicate Finder"
+                           FontSize="28"
+                           FontWeight="Normal" />
+                <TextBlock Grid.Row="1"
+                           Text="By SoftReality"
+                           TextAlignment="Right"
+                           FontSize="20" />
+            </Grid>
+            <Grid Margin="20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer>
+                    <TextBlock />
+                </ScrollViewer>
+                <TextBlock Grid.Row="4">
+                    
+                </TextBlock>
+                <TextBlock Grid.Row="5">
+
+                </TextBlock>
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>
