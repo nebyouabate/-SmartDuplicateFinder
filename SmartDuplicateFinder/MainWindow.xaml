@@ -13,5 +13,10 @@
             <MenuItem Command="{x:Static local:AppCommands.Exit}" >
             </MenuItem>
         </MenuItem>
+
+        <MenuItem Header="_Help">
+            <MenuItem Command="{x:Static local:AppCommands.AboutHelp}" >
+            </MenuItem>
+        </MenuItem>
     </Menu>
 </Window>

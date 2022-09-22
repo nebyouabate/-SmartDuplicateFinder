@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Ninject;
+using SmartDuplicateFinder.Dialog;
+using SmartDuplicateFinder.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,10 +28,31 @@ namespace SmartDuplicateFinder
             InitializeComponent();
             AddCommandBindings();
 
+            var view = App.Current.Container.Get<FileDuplicatesView>();
+            SetView(view);
+
             Title = App.Name;
             DataContext = this;
         }
 
+        public bool IsBusy { get; set; }
+
+        public Control CurrentView { get; private set; }
+
+        private void SetView(Control view)
+        {
+            CurrentView = view;
+        }
+        
+        private void ShowAbout()
+        {
+            var dialog = new About()
+            {
+                Owner = this
+            };
+
+            dialog.ShowDialog();
+        }
         private void AddCommandBindings()
         {
             //
@@ -40,8 +64,9 @@ namespace SmartDuplicateFinder
             //
             // Help Menu
             //
-
-            //CommandBindings.Add(new CommandBinding(AppCommands.AboutHelp, (sender, args) => ShowAbout()));
+            CommandBindings.Add(new CommandBinding(AppCommands.AboutHelp, (sender, args) => ShowAbout()));
         }
+
+
     }
 }
