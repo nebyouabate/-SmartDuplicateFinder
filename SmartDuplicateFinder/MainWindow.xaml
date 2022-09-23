@@ -3,20 +3,43 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SmartDuplicateFinder"
         mc:Ignorable="d"
         Title="!Smart Duplicate Finder!" 
         Height="450" 
-        Width="800">
-    <Menu>
-        <MenuItem Header="_File">
-            <MenuItem Command="{x:Static local:AppCommands.Exit}" >
-            </MenuItem>
-        </MenuItem>
+        Width="800"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow, IsDesignTimeCreatable=True}"  >
 
-        <MenuItem Header="_Help">
-            <MenuItem Command="{x:Static local:AppCommands.AboutHelp}" >
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Command="{x:Static local:AppCommands.Exit}" >
+                </MenuItem>
             </MenuItem>
-        </MenuItem>
-    </Menu>
+
+            <MenuItem Header="_Help">
+                <MenuItem Command="{x:Static local:AppCommands.AboutHelp}" >
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Border Background="Gainsboro">
+            <Border Margin="6" 
+                CornerRadius="3"
+                BorderBrush="LightSlateGray"
+                    BorderThickness="3"
+                    Background="WhiteSmoke">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Bottom">Status</TextBlock>
+                    <Separator DockPanel.Dock="Bottom" Background="LightSlateGray"></Separator>
+                    <xctk:BusyIndicator IsBusy="{Binding IsBusy}">
+                        <ContentControl IsTabStop="False"
+                                        Content="{Binding CurrentView}"
+                                        Background="WhiteSmoke" />
+                    </xctk:BusyIndicator>
+                </DockPanel>
+            </Border>            
+        </Border>
+    </DockPanel>
+   
 </Window>
