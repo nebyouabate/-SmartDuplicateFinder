@@ -2,31 +2,30 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace SmartDuplicateFinder.Dialog
+namespace SmartDuplicateFinder.Dialog;
+
+/// <summary>
+/// Interaction logic for About.xaml
+/// </summary>
+public partial class About : Window
 {
-    /// <summary>
-    /// Interaction logic for About.xaml
-    /// </summary>
-    public partial class About : Window
+    public About()
     {
-        public About()
-        {
-            InitializeComponent();
-            AddCommandBindings();
+        InitializeComponent();
+        AddCommandBindings();
 
-            GetVersionInfo();
+        GetVersionInfo();
 
-            DataContext = this;
-        }
-        public string Version { get; private set; } = "";
+        DataContext = this;
+    }
+    public string Version { get; private set; } = "";
 
-        private void GetVersionInfo()
-        {
-            Version = CoreAssembly.Version.ToString(4);
-        }
-        private void AddCommandBindings()
-        {
-            CommandBindings.Add(new CommandBinding(AppCommands.Okay, (sender, args) => Close()));
-        }
+    private void GetVersionInfo()
+    {
+        Version = CoreAssembly.Version.ToString(4);
+    }
+    private void AddCommandBindings()
+    {
+        CommandBindings.Add(new CommandBinding(AppCommands.Okay, (sender, args) => Close()));
     }
 }

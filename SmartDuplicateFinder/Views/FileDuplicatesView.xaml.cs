@@ -1,4 +1,9 @@
-﻿using System.Windows.Controls;
+﻿using SmartDuplicateFinder.ViewModel;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace SmartDuplicateFinder.Views
 {
@@ -13,11 +18,21 @@ namespace SmartDuplicateFinder.Views
             AddCommandBindings();
 
             DataContext = this;
+
+            Drives = new ObservableCollection<DriveViewModel>();
+
+            var drives = DriveInfo.GetDrives().Where(d => d.IsReady).Select(d => new DriveViewModel(d));
+            foreach (var drive in drives)
+            {
+                Drives.Add(drive);
+            }
         }
 
+        public ObservableCollection<DriveViewModel> Drives { get; set; }
         private void AddCommandBindings()
         {
-            // CommandBindings.Add(new CommandBinding(AppCommands.Exit, (sender, args) => Close()));
+            // CommandBindings.Add(new CommandBinding(AppCommands.Xxxxxxx, (sender, args) => Onxxxxxx(args)));
+            // CommandBindings.Add(new CommandBinding(AppCommands.Xxxxxxx, (sender, args) => Onxxxxxx()));
         }
     }
 }
