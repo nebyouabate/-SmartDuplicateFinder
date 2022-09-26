@@ -1,21 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PropertyChanged;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartDuplicateFinder.ViewModel;
 
-public class DriveViewModel
+[AddINotifyPropertyChangedInterface]
+[DebuggerDisplay("{DisplayName}")]
+public class DriveViewModel : INotifyPropertyChanged
 {
+    public event PropertyChangedEventHandler? PropertyChanged;
     public DriveViewModel(DriveInfo driveInfo)
     {
-        DriveInfo = driveInfo;
+        DriveInfo = driveInfo;       
         Name = driveInfo.Name[..^1];
+        DisplayName = $"{driveInfo.VolumeLabel} ({Name})";
     }
 
-    public string Name { get; set; }    
+    public string Name { get; set; }
+
+    public string DisplayName { get; set; }
+
     public bool IsSelected { get; set; }    
-    public DriveInfo DriveInfo { get; private set; }
+
+    public DriveInfo DriveInfo { get; private set; }   
 }

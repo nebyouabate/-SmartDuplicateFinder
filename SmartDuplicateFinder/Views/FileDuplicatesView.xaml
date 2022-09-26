@@ -16,7 +16,7 @@
         <ListBox Grid.Column="0" ItemsSource="{Binding Path=Drives}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding Name}"/>
+                    <CheckBox IsChecked="{Binding Path=IsSelected}" Content="{Binding Path=DisplayName}"/>
                     <!--<TextBlock Text="{Binding Path=Name}"/>-->
                 </DataTemplate>
             </ListBox.ItemTemplate>
