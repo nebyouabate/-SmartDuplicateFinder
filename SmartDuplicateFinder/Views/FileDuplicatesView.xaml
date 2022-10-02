@@ -16,7 +16,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto" MinWidth="130" MaxWidth="300"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -67,6 +67,4 @@
         </GridSplitter>
         <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Rigt Side</TextBlock>
     </Grid>
-
-
 </UserControl>
