@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SmartDuplicateFinder.Views;
 
@@ -71,12 +72,7 @@ public partial class FileDuplicatesView : UserControl
     public ObservableCollection<DriveViewModel> Drives { get; set; }
     private void AddCommandBindings()
     {
-        // CommandBindings.Add(new CommandBinding(AppCommands.Xxxxxxx, (sender, args) => Onxxxxxx(args)));
+        CommandBindings.Add(new CommandBinding(AppCommands.Refresh, (sender, args) => OnRefreshDrives()));
         // CommandBindings.Add(new CommandBinding(AppCommands.Xxxxxxx, (sender, args) => Onxxxxxx()));
-    }
-
-    private void TreeView_Expanded(object sender, System.Windows.RoutedEventArgs e)
-    {
-
-    }
+    } 
 }

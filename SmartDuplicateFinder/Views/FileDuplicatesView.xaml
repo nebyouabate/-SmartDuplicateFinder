@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:smartDuplicateFinder="clr-namespace:SmartDuplicateFinder"
              xmlns:local="clr-namespace:SmartDuplicateFinder.Views"
              xmlns:converters="clr-namespace:SmartDuplicateFinder.Converters"
              xmlns:viewModels="clr-namespace:SmartDuplicateFinder.ViewModel"
@@ -23,9 +24,12 @@
         <DockPanel Grid.Column="0"
                    Margin="6, 0">
             <DockPanel 
-                 HorizontalAlignment="Left" 
-                 DockPanel.Dock="Bottom">
-                <Button Margin="0, 3" Width="100">Referesh</Button>
+                 Margin="0, 6"
+                 DockPanel.Dock="Bottom"
+                 LastChildFill="False">
+                <Button DockPanel.Dock="Left"
+                        Command="smartDuplicateFinder:AppCommands.Refresh"
+                        Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"/>
             </DockPanel>
             <Label DockPanel.Dock="Top" Content="Drives:"/>
             <TreeView ItemsSource="{Binding Drives}"
@@ -42,6 +46,19 @@
                                 <DockPanel>
                                     <Image DockPanel.Dock="Left" VerticalAlignment="Center" Source="{Binding Icon, Converter={StaticResource _getIcon}}" />
                                     <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{Binding DisplayName}"/>
+                                </DockPanel>
+                            </CheckBox.Content>
+                        </CheckBox>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type viewModels:DirectoryViewModel}" ItemsSource="{Binding SubFolders}">
+                        <CheckBox 
+                            VerticalContentAlignment="Center" 
+                            IsEnabled="{Binding IsSelectable}"
+                            IsChecked="{Binding IsSelected}">
+                            <CheckBox.Content>
+                                <DockPanel>
+                                    <Image DockPanel.Dock="Left" VerticalAlignment="Center" Source="{Binding Icon, Converter={StaticResource _getIcon}}" />
+                                    <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{Binding DisplayName}"></Label>
                                 </DockPanel>
                             </CheckBox.Content>
                         </CheckBox>

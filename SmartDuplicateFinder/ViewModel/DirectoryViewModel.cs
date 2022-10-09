@@ -28,16 +28,18 @@ public class DirectoryViewModel : INotifyPropertyChanged
         DisplayName = "Loading ...";
         Name = "";
 
+        IsSelectable = true;
         IsSelected = false;
         IsExpanded = false;
+        Icon = Icons.OpenFolder;
 
         SubFolders = new ObservableCollection<DirectoryViewModel> { UnExpanded };
     }
 
     public Icons Icon { get; private set; }
     public string Name { get; set; }
-    public string DisplayName { get; set; }
-    //public bool IsSelectable { get; set; }
+    public string DisplayName { get; set; }    
+    public bool IsSelectable { get; set; }
     public bool IsSelected { get; set; }
     public bool IsExpanded { get; set; }
     public DirectoryInfo DirectoryInfo { get; protected set; }
