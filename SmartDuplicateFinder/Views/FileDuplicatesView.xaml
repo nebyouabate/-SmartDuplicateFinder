@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:smartDuplicateFinder="clr-namespace:SmartDuplicateFinder"
              xmlns:local="clr-namespace:SmartDuplicateFinder.Views"
              xmlns:converters="clr-namespace:SmartDuplicateFinder.Converters"
+             xmlns:viewModels="clr-namespace:SmartDuplicateFinder.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=local:FileDuplicatesView, IsDesignTimeCreatable=True}">
@@ -15,11 +17,56 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto" MinWidth="130" MaxWidth="300"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" ItemsSource="{Binding Path=Drives}">
+        <DockPanel Grid.Column="0"
+                   Margin="6, 0">
+            <DockPanel 
+                 Margin="0, 6"
+                 DockPanel.Dock="Bottom"
+                 LastChildFill="False">
+                <Button DockPanel.Dock="Left"
+                        Command="smartDuplicateFinder:AppCommands.Refresh"
+                        Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"/>
+            </DockPanel>
+            <Label DockPanel.Dock="Top" Content="Drives:"/>
+            <TreeView ItemsSource="{Binding Drives}"
+                      TreeViewItem.Expanded="TreeViewItem_OnExpanded">
+                <TreeView.Resources>
+                    <!--IsThreeState to have the thirs state selection enabled -->
+                    <HierarchicalDataTemplate DataType="{x:Type viewModels:DriveViewModel}" ItemsSource="{Binding SubFolders}">
+                        <CheckBox 
+                        VerticalContentAlignment="Center"                             
+                        IsThreeState="True"
+                        IsEnabled="{Binding IsSelectable}"
+                        IsChecked="{Binding Path=IsSelected}">
+                            <CheckBox.Content>
+                                <DockPanel>
+                                    <Image DockPanel.Dock="Left" VerticalAlignment="Center" Source="{Binding Icon, Converter={StaticResource _getIcon}}" />
+                                    <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{Binding DisplayName}"/>
+                                </DockPanel>
+                            </CheckBox.Content>
+                        </CheckBox>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type viewModels:DirectoryViewModel}" ItemsSource="{Binding SubFolders}">
+                        <CheckBox 
+                            VerticalContentAlignment="Center" 
+                            IsEnabled="{Binding IsSelectable}"
+                            IsChecked="{Binding IsSelected}">
+                            <CheckBox.Content>
+                                <DockPanel>
+                                    <Image DockPanel.Dock="Left" VerticalAlignment="Center" Source="{Binding Icon, Converter={StaticResource _getIcon}}" />
+                                    <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{Binding DisplayName}"></Label>
+                                </DockPanel>
+                            </CheckBox.Content>
+                        </CheckBox>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </DockPanel>
+        <!--<ListBox Grid.Column="0" ItemsSource="{Binding Path=Drives}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox 
@@ -33,13 +80,11 @@
                             </DockPanel>
                         </CheckBox.Content>
                     </CheckBox>
-                    <!--<TextBlock Text="{Binding Path=Name}"/>-->
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"></GridSplitter>
+        </ListBox>-->
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch">
+        </GridSplitter>
         <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Rigt Side</TextBlock>
     </Grid>
-
-
 </UserControl>
