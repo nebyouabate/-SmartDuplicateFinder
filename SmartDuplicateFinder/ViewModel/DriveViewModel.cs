@@ -46,38 +46,3 @@ public class DriveViewModel : DirectoryViewModel
 
     private static readonly string s_systemDrive;
 }
-
-
-//private void SubFolders_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-//{
-//    if (e.OldItems is not null)
-//    {
-//        foreach (INotifyPropertyChanged item in e.OldItems)
-//        {
-//            item.PropertyChanged -= SubFolderPropertyChanged;
-//        }
-//    }
-
-//    if (e.NewItems is not null)
-//    {
-//        foreach (INotifyPropertyChanged item in e.NewItems)
-//        {
-//            item.PropertyChanged += SubFolderPropertyChanged;
-//        }
-//    }
-//}
-
-//private void SubFolderPropertyChanged(object? sender, PropertyChangedEventArgs e)
-//{
-//    if (sender is not null)
-//    {
-//        var me = (DirectoryViewModel)sender;
-
-//        foreach (var item in me.SubFolders)
-//        {
-//            item.IsSelected = me.IsSelected;
-//        }
-
-//        IsSelected = me.IsSelected;
-//    }
-//}

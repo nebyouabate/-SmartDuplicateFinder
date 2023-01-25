@@ -20,4 +20,5 @@ public static class AppCommands
     // Other types of buttons
     //
     public static readonly RoutedUICommand Refresh = new("_Refresh", "Refresh", OwnerType);
+    public static readonly RoutedUICommand ClearAll = new("Clear _All", "Clear", OwnerType);
 }

@@ -12,7 +12,7 @@
              d:DataContext="{d:DesignInstance Type=local:FileDuplicatesView, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
-        <converters:GetIcon x:Key="_getIcon" />
+        <converters:GetIcon x:Key="_getIcon" /> 
     </UserControl.Resources>
 
     <Grid>
@@ -22,13 +22,23 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Column="0"
-                   Margin="6, 0">
+                   Margin="6, 0">            
             <DockPanel 
                  Margin="0, 6"
                  DockPanel.Dock="Bottom"
                  LastChildFill="False">
+                <DockPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Padding" Value="14,3" />
+                    </Style>
+                </DockPanel.Resources>
                 <Button DockPanel.Dock="Left"
-                        Command="smartDuplicateFinder:AppCommands.Refresh"
+                        Command="{x:Static smartDuplicateFinder:AppCommands.Refresh}"
+                        Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"/>
+
+                <Button DockPanel.Dock="Left"
+                        Margin="12 0"
+                        Command="{x:Static smartDuplicateFinder:AppCommands.ClearAll}"
                         Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"/>
             </DockPanel>
             <Label DockPanel.Dock="Top" Content="Drives:"/>

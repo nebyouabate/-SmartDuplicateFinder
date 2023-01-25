@@ -1,5 +1,4 @@
 ﻿using SmartDuplicateFinder.ViewModel;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -19,13 +18,15 @@ public partial class FileDuplicatesView : UserControl
         InitializeComponent();
         AddCommandBindings();
 
-
-        Drives = new ObservableCollection<DriveViewModel>();
+        Drives = null!;
+        Init();
 
         OnRefreshDrives();
 
         DataContext = this;
     }
+
+    private void Init() => Drives = new ObservableCollection<DriveViewModel>();
 
     private void TreeViewItem_OnExpanded(object sender, RoutedEventArgs e)
     {
@@ -46,6 +47,7 @@ public partial class FileDuplicatesView : UserControl
     }
 
     public ObservableCollection<DriveViewModel> Drives { get; set; }
+    
     private void AddCommandBindings()
     {
         CommandBindings.Add(new CommandBinding(AppCommands.Refresh, (sender, args) => OnRefreshDrives()));
