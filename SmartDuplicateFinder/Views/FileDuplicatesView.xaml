@@ -55,7 +55,7 @@
                             <CheckBox.Content>
                                 <DockPanel>
                                     <Image DockPanel.Dock="Left" VerticalAlignment="Center" Source="{Binding Icon, Converter={StaticResource _getIcon}}" />
-                                    <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{Binding DisplayName}"/>
+                                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Text="{Binding DisplayName}"/>
                                 </DockPanel>
                             </CheckBox.Content>
                         </CheckBox>
@@ -68,7 +68,7 @@
                             <CheckBox.Content>
                                 <DockPanel>
                                     <Image DockPanel.Dock="Left" VerticalAlignment="Center" Source="{Binding Icon, Converter={StaticResource _getIcon}}" />
-                                    <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{Binding DisplayName}"></Label>
+                                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
                                 </DockPanel>
                             </CheckBox.Content>
                         </CheckBox>

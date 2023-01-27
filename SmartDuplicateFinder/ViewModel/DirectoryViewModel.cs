@@ -1,11 +1,13 @@
 ﻿using SmartDuplicateFinder.Utils;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
 namespace SmartDuplicateFinder.ViewModel;
 
+[DebuggerDisplay("{DisplayName}")]
 public class DirectoryViewModel : INotifyPropertyChanged
 {
 
