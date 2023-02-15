@@ -1,4 +1,5 @@
 ﻿using SmartDuplicateFinder.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -19,13 +20,17 @@ public partial class FileDuplicatesView : UserControl
         InitializeComponent();
         AddCommandBindings();
 
-
-        Drives = new ObservableCollection<DriveViewModel>();
+        Drives = null!;
+        Init();
 
         OnRefreshDrives();
 
         DataContext = this;
     }
+
+    public ObservableCollection<DriveViewModel> Drives { get; set; }
+
+    private void Init() => Drives = new ObservableCollection<DriveViewModel>();
 
     private void TreeViewItem_OnExpanded(object sender, RoutedEventArgs e)
     {
@@ -45,10 +50,44 @@ public partial class FileDuplicatesView : UserControl
         }
     }
 
-    public ObservableCollection<DriveViewModel> Drives { get; set; }
+    private void WalkTree(Func<DirectoryViewModel, bool> process, Action<DirectoryViewModel> action)
+    {
+        var treeNodes = new Stack<DirectoryViewModel>();
+
+        foreach (DriveViewModel drive in Drives.Reverse())
+        {
+            if (process(drive))
+            {
+                treeNodes.Push(drive);
+            }
+        }
+
+        while (treeNodes.TryPop(out var folder))
+        {
+            foreach (DirectoryViewModel item in folder.SubFolders.Reverse())
+            {
+                if (process(item))
+                {
+                    treeNodes.Push(item);
+                }
+            }
+
+            action(folder);
+        }
+    }
+
+    private void OnClearAll()
+    {
+        WalkTree(d => d.IsSelected != false, d => d.IsSelected = false);
+    }
+
     private void AddCommandBindings()
     {
         CommandBindings.Add(new CommandBinding(AppCommands.Refresh, (sender, args) => OnRefreshDrives()));
+        CommandBindings.Add(new CommandBinding(AppCommands.ClearAll, (sender, args) => OnClearAll()));
+
         // CommandBindings.Add(new CommandBinding(AppCommands.Xxxxxxx, (sender, args) => Onxxxxxx()));
     }
+
+
 }
